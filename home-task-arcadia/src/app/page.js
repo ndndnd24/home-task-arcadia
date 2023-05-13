@@ -7,7 +7,7 @@ import MapComponent from "@/components/Cesium";
 
 export default function Home() {
   const googleApiToken = process.env.GOOGLE_API_TOKEN;
-  const [isSignedIn, setSignIn] = useState(false);
+  const [isSignedIn, setSignIn] = useState(true);
 
   function renderMain(isAuthenticated) {
     if (isAuthenticated) {
@@ -18,7 +18,7 @@ export default function Home() {
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               setSignIn(true);
-              console.log(credentialResponse);
+              // console.log(credentialResponse);
             }}
             onError={() => {
               console.log("Login Failed");
