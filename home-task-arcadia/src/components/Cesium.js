@@ -7,40 +7,50 @@ import axios from "axios";
 
 const MapComponent = () => {
   const [coordinates, setCoordinates] = useState(null);
+
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
         const response = await axios.get("/api/coordinates");
         setCoordinates(response.data.budapest);
-        console.log(response.data.budapest);
       } catch (error) {
         console.error("Error fetching coordinates:", error);
       }
     };
 
     fetchCoordinates();
-    console.log(coordinates);
+  }, []);
 
+  useEffect(() => {
     // Initialize Cesium viewer
     const viewer = new Cesium.Viewer("cesiumContainer", {
       terrainProvider: Cesium.createWorldTerrain(),
     });
 
-    // Set initial camera position
-    viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(19.0532484, 47.4986567, 10000),
-    });
+    if (coordinates) {
+      // Set initial camera position
+      viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(
+          parseFloat(coordinates.lng),
+          parseFloat(coordinates.lat),
+          10000
+        ),
+      });
 
-    // Add a point at Budapest"s coordinates
-    const entity = viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(19.0532484, 47.4986567),
-      point: {
-        pixelSize: 10,
-        color: Cesium.Color.RED,
-        outlineColor: Cesium.Color.WHITE,
-        outlineWidth: 2,
-      },
-    });
+      // Add a point at Budapest's coordinates
+      const entity = viewer.entities.add({
+        position: Cesium.Cartesian3.fromDegrees(
+          parseFloat(coordinates.lng),
+          parseFloat(coordinates.lat)
+        ),
+        point: {
+          pixelSize: 10,
+          color: Cesium.Color.RED,
+          outlineColor: Cesium.Color.WHITE,
+          outlineWidth: 2,
+        },
+      });
+    }
 
     return () => {
       // Clean up Cesium viewer
@@ -48,7 +58,7 @@ const MapComponent = () => {
         viewer.destroy();
       }
     };
-  }, []);
+  }, [coordinates]);
 
   return (
     <div
