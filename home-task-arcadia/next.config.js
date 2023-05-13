@@ -61,7 +61,7 @@ module.exports = {
     return [
       {
         source: '/api/:path*',
-        destination: '/src/api/:path*',
+        destination: '/api/:path*',
       },
     ];
   },

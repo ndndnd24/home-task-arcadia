@@ -1,11 +1,26 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as Cesium from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
+import axios from "axios";
 
 const MapComponent = () => {
+  const [coordinates, setCoordinates] = useState(null);
   useEffect(() => {
+    const fetchCoordinates = async () => {
+      try {
+        const response = await axios.get("/api/coordinates");
+        setCoordinates(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching coordinates:", error);
+      }
+    };
+
+    fetchCoordinates();
+    console.log(coordinates);
+
     // Initialize Cesium viewer
     const viewer = new Cesium.Viewer("cesiumContainer", {
       terrainProvider: Cesium.createWorldTerrain(),
@@ -50,4 +65,3 @@ const MapComponent = () => {
 };
 
 export default MapComponent;
-
