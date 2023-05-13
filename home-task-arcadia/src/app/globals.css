@@ -93,7 +93,8 @@ a {
 }
 
 #app-header,
-#app-footer {
+#app-footer,
+#google-auth-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,6 +107,15 @@ a {
 
 #app-footer {
   font-size: 12px;
+}
+
+#google-auth-button {
+  flex-direction: column;
+  gap: 25px;
+}
+
+.sign-in-text {
+  font-size: 20px;
 }
 
 @media (prefers-color-scheme: dark) {

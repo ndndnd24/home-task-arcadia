@@ -15,6 +15,7 @@ export default function Home() {
     } else {
       return (
         <div style={{ height: "90vh" }} id="google-auth-button">
+          <div class="sign-in-text">Please sign in with your Google Account to use the application:</div>
           <GoogleOAuthProvider clientId={googleApiToken}>
             <GoogleLogin
               onSuccess={(credentialResponse) => {
