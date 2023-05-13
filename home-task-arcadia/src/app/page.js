@@ -3,6 +3,7 @@
 import Head from "next/head";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
+import MapComponent from "@/components/Cesium";
 
 export default function Home() {
   const googleApiToken = process.env.GOOGLE_API_TOKEN;
@@ -10,7 +11,7 @@ export default function Home() {
 
   function renderMain(isAuthenticated) {
     if (isAuthenticated) {
-      return <>some body</>;
+      return <MapComponent />;
     } else {
       return (
         <GoogleOAuthProvider clientId={googleApiToken}>
