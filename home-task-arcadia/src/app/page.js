@@ -14,17 +14,19 @@ export default function Home() {
       return <MapComponent />;
     } else {
       return (
-        <GoogleOAuthProvider clientId={googleApiToken}>
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              setSignIn(true);
-              // console.log(credentialResponse);
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
-        </GoogleOAuthProvider>
+        <div style={{ height: "90vh" }}>
+          <GoogleOAuthProvider clientId={googleApiToken}>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                setSignIn(true);
+                // console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+          </GoogleOAuthProvider>
+        </div>
       );
     }
   }
@@ -34,9 +36,9 @@ export default function Home() {
       <Head>
         <title>Home Task for Arcadia</title>
       </Head>
-      <header>some header</header>
+      <header style={{ height: "5vh" }} id="app-header">some header</header>
       <main>{renderMain(isSignedIn)}</main>
-      <footer>some footer</footer>
+      <footer style={{ height: "5vh" }} id="app-footer">some footer</footer>
     </div>
   );
 }
