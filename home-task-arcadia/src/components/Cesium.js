@@ -11,8 +11,8 @@ const MapComponent = () => {
     const fetchCoordinates = async () => {
       try {
         const response = await axios.get("/api/coordinates");
-        setCoordinates(response.data);
-        console.log(response.data);
+        setCoordinates(response.data.budapest);
+        console.log(response.data.budapest);
       } catch (error) {
         console.error("Error fetching coordinates:", error);
       }
